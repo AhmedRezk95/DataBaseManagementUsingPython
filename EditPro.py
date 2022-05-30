@@ -25,6 +25,7 @@ def EditProject(mail):
         exist= df_mail["title"].str.contains(t).any()
         while t.isdigit() or (not exist) or t=="":
             os.system('clear')
+            print(df_mail)
             print("Not Existed, Try again!")
             # Check again
             t=input("Enter Project title: ")
@@ -33,20 +34,31 @@ def EditProject(mail):
         select=input("which column do you want to change?\n")
         while not (select in df.columns):
             os.system('clear')
+            print(df_mail)
             print("not existed, try again")
             select=input("select column again:\n")
         # in case it is not date type
         if select != "str" and select != "end":
             p=input("Set the new value\n")
-    
+            # Incase you want to change title you have to make sure that is unique value
             unique= df_mail["title"].str.contains(p).any()
-            while p.isdigit() or unique:
-                os.system('clear')
-                print("Error, Try Again")
-                # Check again
-                p=input("Enter Project title: ")
-                unique= df_mail["title"].str.contains(p).any()
-
+            if select != "total":
+                # unlike total column all parameter are string type
+                while p.isdigit() or unique:
+                    os.system('clear')
+                    print(df_mail)
+                    print("Invalid Type(Integer), Try Again")
+                    # Check again
+                    p=input("Enter New value again!: ")
+                    unique= df_mail["title"].str.contains(p).any()
+            else:
+                # in case of total it must be integer
+                while not p.isdigit():
+                    os.system('clear')
+                    print(df_mail)
+                    print("Invalid Type(string), Try Again")
+                    # Check again
+                    p=input("Enter New value again!: ")
             # replace value of selected column name based on title
             df_mail.loc[df_mail["title"] == t, select ] = p
             # update it to the main dataframe
@@ -60,11 +72,14 @@ def EditProject(mail):
             # replace value of selected column name based on title
             while not validate(p):
                 os.system('clear')
+                print(df_mail)
                 print("This is not date format!")
                 p=input("Enter a valid date DD/MM/YYYY: ")
             # Check str date < end date
             while not earlier(p,end):
                 os.system('clear')
+                print(df_mail)
+                
                 p=input("Enter a valid date DD/MM/YYYY:\n")
             # replace
             df_mail.loc[df_mail["title"] == t, select ] = p
@@ -79,11 +94,13 @@ def EditProject(mail):
             # replace value of selected column name based on title
             while not validate(p):
                 os.system('clear')
+                print(df_mail)
                 print("This is not date format!")
                 p=input("Enter a valid date DD/MM/YYYY: ")
             # Check str date < end date
             while not earlier(str,p):
                 os.system('clear')
+                print(df_mail)
                 p=input("Enter a valid date DD/MM/YYYY:\n")
             # replace
             df_mail.loc[df_mail["title"] == t, select ] = p
@@ -96,4 +113,3 @@ def EditProject(mail):
     else:
         print("No project created by this user")
 
-# EditProject("ar@g.com")

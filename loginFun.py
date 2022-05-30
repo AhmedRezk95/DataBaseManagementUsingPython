@@ -4,7 +4,7 @@ import os
 
 def login():
     os.system('clear')
-    logmail=input("Enter Login mail:\n")
+    logmail=input("Enter Login mail:\n").lower()
     # Open
     DataBaseFile = open('DataBase.csv', 'r')
     for i in DataBaseFile.readlines():
@@ -14,11 +14,11 @@ def login():
             os.system('clear')
             print("Mail found!")
             logpass=input("Enter Password:\n")
-            while logpass != user[3]:
+            while logpass != user[3] or logpass == "":
                 print("password not matched, please try again")
                 logpass=input("Enter Password again or press 0 to exit:\n")
                 os.system('clear')
-                if int(logpass) == 0:
+                if logpass == "0":
                     DataBaseFile.close()
                     return False
             os.system('clear')

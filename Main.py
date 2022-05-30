@@ -23,7 +23,7 @@ while True:
             if mail == False:
                 continue
             while True:
-                selection=input("----------------------------------------------------------------------\nselect your choice: \n1)Add\n2)view\n3)edit\n4)delete\n5)search based on date\n6)exit\n----------------------------------------------------------------------\n->")
+                selection=input("----------------------------------------------------------------------\nselect your choice: \n1)Add\n2)view\n3)edit\n4)delete\n5)search based on date\n6)exit\n----------------------------------------------------------------------\n-> ")
                 if selection.isdigit():
                     if int(selection) == 1:
                         AddProjects(mail)
@@ -52,14 +52,13 @@ while True:
         if int(selection) == 2:
             os.system('clear')
             reg = registeration()
-            if reg == False:
-                continue
+            continue
         if int(selection) == 3:
             os.system('clear')
             break
         else:
             os.system('clear')
-            print("Not Valid Number, Try Again")
+            print("Not Valid Selection Number, Try Again")
     else:
         os.system('clear')
         print("Empty/String error, Enter Again")

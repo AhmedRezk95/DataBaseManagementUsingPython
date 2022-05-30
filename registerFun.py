@@ -46,11 +46,11 @@ def registeration():
     # Set checks for parameter mobile 1
     os.system('clear')
     mobile=input("Mobile(Egyptian): ").lower()
-
+    # regex expression 01[digit contains 0 or 1 or 2 or 5] + 8 digits of any digit [0-9]
     regex = r'01[0125]+[0-9]{8}'
-    while (not re.fullmatch(regex, mobile)):
-        print("Not a Valid phone number")
-        mobile=input("Enter a valid Mobile(Egyptian): ").lower()
+    while (not re.search(regex, mobile)):
+        mobile=input("Not a Valid phone number\nEnter a valid Mobile(Egyptian): ").lower()
+        
     # add egyptian code
     mobile="+2"+mobile
     # collect data
@@ -63,5 +63,4 @@ def registeration():
     DataBaseFile.close()
     return True
 
-#registeration()
 

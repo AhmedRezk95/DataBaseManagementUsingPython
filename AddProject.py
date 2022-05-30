@@ -13,7 +13,7 @@ def AddProjects(email):
     unique= df["title"].str.contains(titleAdd).any()
     while titleAdd.isdigit() or unique:
         os.system('clear')
-        print("Error, Try Again")
+        print("Duplicate/Integer Found!, Try Again")
         # Check again
         titleAdd=input("Enter Project title: ")
         unique= df["title"].str.contains(titleAdd).any()
@@ -49,8 +49,9 @@ def AddProjects(email):
 
     # collect data
     data = f"{email},{titleAdd},{detailAdd},{totalAdd},{strAdd},{endAdd}\n"
+    os.system('clear')
     print("Project Added")
-    #open data base and get ready to append
+    #open data base and get ready to append: write from last line
     ProjectFile= open("projects.csv","a")
     # append data to your database
     ProjectFile.write(data)

@@ -7,7 +7,6 @@ def validate(d):
     except ValueError:
         return False
 
-#print(validate("20"))
 
 # Function to check and set end date > start date
 def earlier(s,e):
@@ -16,7 +15,7 @@ def earlier(s,e):
             print("Valid start and end date")
             return True
         else:
-            print("Not Valid, date is later than start")
+            print("Not Valid,End date is ealier than Start date")
             return False
     else:
         print("Not a date, Please try again!")

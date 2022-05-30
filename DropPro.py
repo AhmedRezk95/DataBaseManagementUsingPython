@@ -14,31 +14,34 @@ def DropProject(mail):
         while not (select in df.columns):
             print("not existed, try again")
             select=input("select column:\n")
-        location=input("project column value: \n")
-        # if target is string
-        if not location.isdigit():
-            # check if string is existed
-            exists= df[select].str.contains(location).any()
-            if exists:
-                # drop these records
-                df.drop(df[df[select] == location].index, inplace=True)
-                df.to_csv("projects.csv",header=None,index=None)
-                print(df.loc[df['mail'] == mail])
-            else:
-                print("Not existed")
-        else:
-            exists= int(location) in df[select]
-            if exists:
-                df.drop(df[df[select] == int(location)].index, inplace=True)
-                df.to_csv("projects.csv",header=None,index=None)
-                print(df.loc[df['mail'] == mail])
-            else:
-                print("Not existed, number")
+            
+        value=input("project column value: \n")
+        # Use delete function
+        delete(df,mail,select,value)
     else:
         print("No project created by this user")
 
 
-def delete(df,select,location):
-    df.drop(df[df[select] == int(location)].index, inplace=True)
-    df.to_csv("projects.csv",header=None,index=None)
-    print(df.loc[df['mail'] == mail])
+def delete(df,mail_value,select,columnValue):
+    # if target is string
+    if not columnValue.isdigit() and select != "total":
+        # check if string is existed
+        exists= df[select].str.contains(columnValue).any()
+        if exists:
+            # drop these records
+            df.drop(df[df[select] == columnValue].index, inplace=True)
+            df.to_csv("projects.csv",header=None,index=None)
+            print(df.loc[df['mail'] == mail_value])
+        else:
+            print("Not existed")
+    # in case if user choose total and set string value
+    elif not columnValue.isdigit() and select == "total":
+        print("Invalid Parameter(string)")
+    else:
+        exists= int(columnValue) in df[select]
+        if exists:
+            df.drop(df[df[select] == int(columnValue)].index, inplace=True)
+            df.to_csv("projects.csv",header=None,index=None)
+            print(df.loc[df['mail'] == mail_value])
+        else:
+            print("Not existed, number")
